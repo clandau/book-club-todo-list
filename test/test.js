@@ -23,4 +23,3 @@ describe("todo items", () => {
 })
 
 
-mocha.run();
