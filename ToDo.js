@@ -10,7 +10,7 @@ class ToDo {
   }
 }
 
-let toDos = [];
+const toDos = [];
 
 const toDoInput = document.getElementById("toDo");
 const addForm = document.getElementById("addForm");
@@ -19,7 +19,8 @@ addForm.addEventListener("submit", addItem);
 function addItem(ev){
   ev.preventDefault();
 
-  let inputValue = toDoInput.value; 
+  const inputValue = toDoInput.value;
+  if (inputValue === "") return;
   const item = new ToDo(inputValue);
   toDos.push(item);
   toDoInput.value = "";
