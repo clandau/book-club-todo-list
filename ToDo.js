@@ -3,9 +3,8 @@ class ToDo {
     this.text = text;
     this.complete = false;
   }
-  
 
-  set ItemComplete(complete){
+  set ItemComplete(complete) {
     this.complete = complete;
   }
 }
@@ -15,8 +14,9 @@ const toDos = [];
 const toDoInput = document.getElementById("toDo");
 const addForm = document.getElementById("addForm");
 addForm.addEventListener("submit", addItem);
+const toDosList = document.getElementById("toDos");
 
-function addItem(ev){
+function addItem(ev) {
   ev.preventDefault();
 
   const inputValue = toDoInput.value;
@@ -24,5 +24,12 @@ function addItem(ev){
   const item = new ToDo(inputValue);
   toDos.push(item);
   toDoInput.value = "";
-  console.log(toDos);
+  renderAddedTodo(toDos.length - 1);
+}
+
+function renderAddedTodo(index) {
+  const todoItem = toDos[index];
+  const todoLi = document.createElement("li");
+  todoLi.innerText = todoItem.text;
+  toDosList.appendChild(todoLi);
 }
