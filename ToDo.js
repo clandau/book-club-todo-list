@@ -33,12 +33,14 @@ function renderAddedTodo(index) {
   const todoLi = document.createElement("li");
   const deleteButton = document.createElement("button");
   todoLi.innerText = todoItem.text;
+  todoLi.id = index;
   deleteButton.innerText = "delete";
   deleteButton.id = index;
   span.appendChild(todoLi);
   span.appendChild(deleteButton);
   toDosList.appendChild(span);
   deleteButton.addEventListener("click", deleteTodo);
+  todoLi.addEventListener("click", markCompleted);
 }
 
 function deleteTodo(ev) {
@@ -46,6 +48,22 @@ function deleteTodo(ev) {
   ev.target.removeEventListener;
   toDos.splice(id, 1);
   renderList();
+}
+
+function markCompleted(ev) {
+  const id = ev.target.id;
+  console.log(ev.target);
+  const todo = toDos[id];
+  const todoText = ev.target.innerText;
+  if (todo.complete === false) {
+    ev.target.innerHTML = `<s>${todoText}</s>`;
+    toDos.complete = true;
+  } else {
+    ev.target.innerHTML = todoText;
+    toDos.complete = false;
+  }
+
+  console.log(toDos);
 }
 
 function renderList() {
