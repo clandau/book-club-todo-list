@@ -29,7 +29,26 @@ function addItem(ev) {
 
 function renderAddedTodo(index) {
   const todoItem = toDos[index];
+  const span = document.createElement("span");
   const todoLi = document.createElement("li");
+  const deleteButton = document.createElement("button");
   todoLi.innerText = todoItem.text;
-  toDosList.appendChild(todoLi);
+  deleteButton.innerText = "delete";
+  deleteButton.id = index;
+  span.appendChild(todoLi);
+  span.appendChild(deleteButton);
+  toDosList.appendChild(span);
+  deleteButton.addEventListener("click", deleteTodo);
+}
+
+function deleteTodo(ev) {
+  const id = ev.target.id;
+  ev.target.removeEventListener;
+  toDos.splice(id, 1);
+  renderList();
+}
+
+function renderList() {
+  toDosList.innerHTML = "";
+  toDos.forEach((todo, index) => renderAddedTodo(index));
 }
