@@ -40,7 +40,7 @@ function renderAddedTodo(index) {
   span.appendChild(deleteButton);
   toDosList.appendChild(span);
   deleteButton.addEventListener("click", deleteTodo);
-  todoLi.addEventListener("click", () => markCompleted(index));
+  todoLi.addEventListener("click", () => toggleCompleted(index));
 }
 
 function deleteTodo(ev) {
@@ -50,9 +50,7 @@ function deleteTodo(ev) {
   renderList();
 }
 
-function markCompleted(id) {
-  // const id = ev.target.id;
-  // console.log(ev.target);
+function toggleCompleted(id) {
   const todo = toDos[id];
   const todoText = todo.text;
   const li = document.getElementById(id);
