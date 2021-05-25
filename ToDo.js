@@ -40,7 +40,7 @@ function renderAddedTodo(index) {
   span.appendChild(deleteButton);
   toDosList.appendChild(span);
   deleteButton.addEventListener("click", deleteTodo);
-  todoLi.addEventListener("click", markCompleted);
+  todoLi.addEventListener("click", () => markCompleted(index));
 }
 
 function deleteTodo(ev) {
@@ -50,17 +50,18 @@ function deleteTodo(ev) {
   renderList();
 }
 
-function markCompleted(ev) {
-  const id = ev.target.id;
-  console.log(ev.target);
+function markCompleted(id) {
+  // const id = ev.target.id;
+  // console.log(ev.target);
   const todo = toDos[id];
-  const todoText = ev.target.innerText;
+  const todoText = todo.text;
+  const li = document.getElementById(id);
   if (todo.complete === false) {
-    ev.target.innerHTML = `<s>${todoText}</s>`;
-    toDos.complete = true;
+    li.innerHTML = `<s>${todoText}</s>`;
+    todo.complete = true;
   } else {
-    ev.target.innerHTML = todoText;
-    toDos.complete = false;
+    li.innerHTML = todoText;
+    todo.complete = false;
   }
 
   console.log(toDos);
