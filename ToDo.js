@@ -9,7 +9,7 @@ class ToDo {
   }
 }
 
-const toDos = [];
+let toDos = [];
 
 const toDoInput = document.getElementById("toDo");
 const addForm = document.getElementById("addForm");
@@ -21,6 +21,8 @@ toDosList.addEventListener("click", (e) => {
     toggleCompleted(e);
   }
 });
+const clearCompletedButton = document.getElementById("clear-completed-btn");
+
 
 function addItem(ev) {
   ev.preventDefault();
@@ -73,4 +75,14 @@ function toggleCompleted(e) {
 function renderList() {
   toDosList.innerHTML = "";
   toDos.forEach((todo, index) => renderAddedTodo(index));
+}
+
+function clearCompleted() {
+  toDos = toDos.filter(todo => {
+    return !todo.complete;
+  });
+  const completedItems = document.querySelectorAll("#toDos .strike");
+  completedItems.forEach(node => {
+    node.parentNode.parentNode.removeChild(node.parentNode)
+  })
 }
