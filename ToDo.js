@@ -81,8 +81,5 @@ function clearCompleted() {
   toDos = toDos.filter(todo => {
     return !todo.complete;
   });
-  const completedItems = document.querySelectorAll("#toDos .strike");
-  completedItems.forEach(node => {
-    node.parentNode.parentNode.removeChild(node.parentNode)
-  })
+  renderList();
 }
