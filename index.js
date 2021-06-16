@@ -6,6 +6,7 @@ const toDoUL = document.getElementById("toDos");
 const clearCompletedButton = document.getElementById("clear-completed-btn");
 
 
+
 addForm.addEventListener("submit", addItem);
 toDoUL.addEventListener("click", (e) => {
   console.log(e.target.classList)
@@ -22,6 +23,7 @@ function addItem(ev) {
   toDoListItems.push(item);
   toDoInput.value = "";
   renderAddedTodo(toDoListItems.length - 1);
+  displayRemainingTasks()
 }
 
 function renderAddedTodo(index) {
@@ -52,6 +54,7 @@ function toggleCompleted(e) {
   const li = document.getElementById(e.target.id);
   li.classList.toggle("strike");
   toDo.complete = !toDo.complete;
+  displayRemainingTasks();
   // if (toDo.complete === false) {
   //   li.classList.add("strike");
   //   toDo.complete = true;
@@ -63,7 +66,19 @@ function toggleCompleted(e) {
 
 function renderList() {
   toDoUL.innerHTML = "";
-  toDoListItems.forEach((toDo, index) => renderAddedTodo(index));
+  toDoListItems.forEach((toDo, index) => {
+    renderAddedTodo(index);
+  }) 
+  displayRemainingTasks()
+}
+
+function displayRemainingTasks() {
+  let countRemainingTasks = toDoListItems.filter(toDo => !toDo.complete).length
+
+  const remainingTasksHeader = document.getElementById('remainingTasks')
+
+  remainingTasksHeader.innerText = `Remaining tasks: ${countRemainingTasks}`
+	console.log(countRemainingTasks)
 }
 
 function clearCompleted() {
